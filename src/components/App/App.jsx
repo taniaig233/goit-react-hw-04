@@ -25,12 +25,15 @@ export default function App() {
   const [selectedImage, setSelectedImage] = useState(null); // Стан для зберігання вибраного зображення для модального вікна
   const [modalIsOpen, setModalIsOpen] = useState(false); // Стан для відображення/приховування модального вікна
 
+
   useEffect(() => {
     Modal.setAppElement("#root");
   }, []);
-
+    
+  
   const handleSearch = async (searchQuery) => {
-    try {
+      try {
+      setError(false);
       setLoading(true);
       setIsSearching(true);
       setImages([]);
@@ -62,7 +65,8 @@ export default function App() {
   };
 
   const handleLoadMore = async () => {
-    try {
+      try {
+      setError(false);
       setLoadingMore(true);
       const nextPage = page + 1;
       const dataImages = await getImagesUnplash(search, nextPage);
@@ -81,12 +85,13 @@ export default function App() {
     return totalPages !== 0 && totalPages !== page && !loadingMore;
   };
 
-  const openModal = (image) => {
+   const openModal = (image) => {
     setSelectedImage(image);
     setModalIsOpen(true);
   };
   const closeModal = () => setModalIsOpen(false);
 
+  
   return (
     <>
       <SearchBar onSubmit={handleSearch} />
@@ -104,9 +109,11 @@ export default function App() {
         <LoadMoreBtn onClick={handleLoadMore} isVisible={isVisible} />
       )}     
       <ImageModal
-        isOpen={modalIsOpen}
-        image={selectedImage}
-        onCloseModal={closeModal}
+      isOpen={modalIsOpen}
+      image={selectedImage}
+      onCloseModal={closeModal}
+             
+              
       />
     </>
   );
