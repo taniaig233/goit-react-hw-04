@@ -7,7 +7,7 @@ import css from "./SearchBar.module.css";
 export default function SearchBar ({ onSubmit }){
   const handleSubmit = (values, actions) => {
       const lowerCaseSearch = values.search.trim().toLowerCase();
-      if (lowerCaseSearch === " ") {
+      if (lowerCaseSearch === "") {
           toast.error("Please enter a serch information");
           return;
       }
